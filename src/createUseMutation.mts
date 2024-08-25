@@ -55,7 +55,7 @@ export const createUseMutation = ({
   const mutationResult = ts.factory.createTypeAliasDeclaration(
     [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(
-      `${className}${capitalizeFirstLetter(methodName)}MutationResult`,
+      `${capitalizeFirstLetter(methodName)}MutationResult`,
     ),
     undefined,
     awaitedResponseDataType,
@@ -97,7 +97,7 @@ export const createUseMutation = ({
       [
         ts.factory.createVariableDeclaration(
           ts.factory.createIdentifier(
-            `use${className}${capitalizeFirstLetter(methodName)}`,
+            `use${capitalizeFirstLetter(methodName)}`,
           ),
           undefined,
           undefined,

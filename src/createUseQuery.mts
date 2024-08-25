@@ -44,7 +44,7 @@ export const createApiResponseType = ({
   const apiResponse = ts.factory.createTypeAliasDeclaration(
     [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(
-      `${capitalizeFirstLetter(className)}${capitalizeFirstLetter(methodName)}DefaultResponse`,
+      `${capitalizeFirstLetter(methodName)}DefaultResponse`,
     ),
     undefined,
     awaitedResponseDataType,
@@ -146,7 +146,7 @@ export function createReturnTypeExport({
   return ts.factory.createTypeAliasDeclaration(
     [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createIdentifier(
-      `${capitalizeFirstLetter(className)}${capitalizeFirstLetter(methodName)}QueryResult`,
+      `${capitalizeFirstLetter(methodName)}QueryResult`,
     ),
     [
       ts.factory.createTypeParameterDeclaration(
@@ -189,7 +189,7 @@ export function createQueryKeyExport({
           undefined,
           undefined,
           ts.factory.createStringLiteral(
-            `${className}${capitalizeFirstLetter(methodName)}`,
+            `${capitalizeFirstLetter(methodName)}`,
           ),
         ),
       ],
@@ -203,7 +203,7 @@ export function hookNameFromMethod({
   className,
 }: { method: MethodDeclaration; className: string }) {
   const methodName = getNameFromMethod(method);
-  return `use${className}${capitalizeFirstLetter(methodName)}`;
+  return `use${capitalizeFirstLetter(methodName)}`;
 }
 
 export function createQueryKeyFromMethod({
