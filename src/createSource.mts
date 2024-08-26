@@ -10,7 +10,7 @@ const createSourceFile = async (
   outputPath: string,
   serviceEndName: string,
   pageParam: string,
-  nextPageParam: string
+  nextPageParam: string,
 ) => {
   const project = new Project({
     // Optionally specify compiler options, tsconfig.json, in-memory file system, and more here.
@@ -35,7 +35,7 @@ const createSourceFile = async (
   const commonSource = ts.factory.createSourceFile(
     [...imports, ...exports.allCommon],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   const commonImport = ts.factory.createImportDeclaration(
@@ -43,10 +43,10 @@ const createSourceFile = async (
     ts.factory.createImportClause(
       false,
       ts.factory.createIdentifier("* as Common"),
-      undefined
+      undefined,
     ),
     ts.factory.createStringLiteral(`./${OpenApiRqFiles.common}`),
-    undefined
+    undefined,
   );
 
   const commonExport = ts.factory.createExportDeclaration(
@@ -54,7 +54,7 @@ const createSourceFile = async (
     false,
     undefined,
     ts.factory.createStringLiteral(`./${OpenApiRqFiles.common}`),
-    undefined
+    undefined,
   );
 
   const queriesExport = ts.factory.createExportDeclaration(
@@ -62,13 +62,13 @@ const createSourceFile = async (
     false,
     undefined,
     ts.factory.createStringLiteral(`./${OpenApiRqFiles.queries}`),
-    undefined
+    undefined,
   );
 
   const mainSource = ts.factory.createSourceFile(
     [commonImport, ...imports, ...exports.mainExports],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   const infiniteQueriesSource = ts.factory.createSourceFile(
@@ -83,22 +83,22 @@ const createSourceFile = async (
               ts.factory.createImportSpecifier(
                 false,
                 undefined,
-                ts.factory.createIdentifier("InfiniteData")
+                ts.factory.createIdentifier("InfiniteData"),
               ),
               ts.factory.createImportSpecifier(
                 false,
                 undefined,
-                ts.factory.createIdentifier("UseInfiniteQueryOptions")
+                ts.factory.createIdentifier("UseInfiniteQueryOptions"),
               ),
               ts.factory.createImportSpecifier(
                 false,
                 undefined,
-                ts.factory.createIdentifier("useInfiniteQuery")
+                ts.factory.createIdentifier("useInfiniteQuery"),
               ),
-            ])
+            ]),
           ),
           ts.factory.createStringLiteral("@tanstack/react-query"),
-          undefined
+          undefined,
         ),
       ],
       commonImport,
@@ -106,25 +106,25 @@ const createSourceFile = async (
       ...exports.infiniteQueriesExports,
     ],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   const suspenseSource = ts.factory.createSourceFile(
     [commonImport, ...imports, ...exports.suspenseExports],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   const indexSource = ts.factory.createSourceFile(
     [commonExport, queriesExport],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   const prefetchSource = ts.factory.createSourceFile(
     [commonImport, ...imports, ...exports.allPrefetchExports],
     ts.factory.createToken(ts.SyntaxKind.EndOfFileToken),
-    ts.NodeFlags.None
+    ts.NodeFlags.None,
   );
 
   return {
@@ -155,28 +155,28 @@ export const createSource = async ({
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
   const infiniteQueriesFile = ts.createSourceFile(
     `${OpenApiRqFiles.infiniteQueries}.ts`,
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
   const commonFile = ts.createSourceFile(
     `${OpenApiRqFiles.common}.ts`,
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
   const suspenseFile = ts.createSourceFile(
     `${OpenApiRqFiles.suspense}.ts`,
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
 
   const indexFile = ts.createSourceFile(
@@ -184,7 +184,7 @@ export const createSource = async ({
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
 
   const prefetchFile = ts.createSourceFile(
@@ -192,7 +192,7 @@ export const createSource = async ({
     "",
     ts.ScriptTarget.Latest,
     false,
-    ts.ScriptKind.TS
+    ts.ScriptKind.TS,
   );
 
   const printer = ts.createPrinter({
@@ -211,7 +211,7 @@ export const createSource = async ({
     outputPath,
     serviceEndName,
     pageParam,
-    nextPageParam
+    nextPageParam,
   );
 
   const comment = `// generated with @7nohe/openapi-react-query-codegen@${version} \n\n`;
@@ -229,7 +229,7 @@ export const createSource = async ({
     printer.printNode(
       ts.EmitHint.Unspecified,
       infiniteQueriesSource,
-      infiniteQueriesFile
+      infiniteQueriesFile,
     );
 
   const suspenseResult =
