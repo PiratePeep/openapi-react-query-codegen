@@ -353,6 +353,9 @@ export function createQueryHook({
                   ],
               [
                 ts.factory.createObjectLiteralExpression([
+                  ts.factory.createSpreadAssignment(
+                    ts.factory.createIdentifier("options"),
+                  ),
                   ts.factory.createPropertyAssignment(
                     ts.factory.createIdentifier("queryKey"),
                     ts.factory.createCallExpression(
@@ -448,9 +451,6 @@ export function createQueryHook({
                     ),
                   ),
                   ...createInfiniteQueryParams(pageParam, nextPageParam),
-                  ts.factory.createSpreadAssignment(
-                    ts.factory.createIdentifier("options"),
-                  ),
                 ]),
               ],
             ),
